@@ -8,11 +8,9 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
-        <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet.photon.css">
-        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -29,7 +27,6 @@
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
-        <script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -38,7 +35,6 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet.photon.js"></script>
-        <script src="js/leaflet-measure.js"></script>
         <script src="data/sismos_092017_1.js"></script>
         <script>
         var map = L.map('map', {
@@ -111,17 +107,6 @@
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-        var measureControl = new L.Control.Measure({
-            position: 'topleft',
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'sqmeters',
-            secondaryAreaUnit: 'hectares'
-        });
-        measureControl.addTo(map);
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0].innerHTML = '';
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0].className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
@@ -147,7 +132,8 @@
                         <td colspan="2">' + (feature.properties['Hora'] !== null ? autolinker.link(String(feature.properties['Hora']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Magnitud'] !== null ? autolinker.link(String(feature.properties['Magnitud']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Magnitud</th>\
+                        <td>' + (feature.properties['Magnitud'] !== null ? autolinker.link(String(feature.properties['Magnitud']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Latitud'] !== null ? autolinker.link(String(feature.properties['Latitud']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
